@@ -1,9 +1,9 @@
 def cycle(arr, n):
-    for i in range(0,n+1):
+    for i in range(0,n):
         for j in arr:
             yield j
 
-arr = list(map(int, input().split()))
+arr = input().split()
 n = int(input().strip())
 
 for x in cycle(arr, n):
