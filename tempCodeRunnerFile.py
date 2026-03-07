@@ -1,10 +1,5 @@
-def cycle(arr, n):
-    for i in range(0,n+1):
-        for j in arr:
-            yield j
+import re
+s = input()
 
-arr = list(map(int, input().split()))
-n = int(input().strip())
-
-for x in cycle(arr, n):
-    print(x, end=" ")
+a = re.search(r"Name:\s*([A-Za-z]+),\s*Age:\s*(\d+)" ,s)
+print(a.group(1), a.group(2))
