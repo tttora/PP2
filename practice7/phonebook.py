@@ -84,7 +84,7 @@ def insertfromconsole():
         with connect_db() as conn:
             cursor = conn.cursor()
             cursor.execute(
-                "INSERT INTO Phonebook VALUES (?, ?)",
+                "INSERT INTO Phonebook (name, phone) VALUES (?, ?)",
                 (name, phone)
             )
             conn.commit()
