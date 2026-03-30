@@ -99,11 +99,11 @@ def updating():
     newname = input("Enter new name(leave blank to skip: )").strip()
     newphone = input("Enter new phone(leave blank to skip): ").strip()
 
-    if not newname and newphone:
+    if not newname and not newphone:
         print("Nothing to update")
         return
     
-    if newphone and not is_valid:
+    if newphone and not is_valid(newphone):
         print("Invalid new phone number")
         return
     
@@ -112,7 +112,7 @@ def updating():
             cursor = conn.cursor()
             cursor.execute(
                 "SELECT * FROM Phonebook WHERE phone = ?", 
-                (oldphone)
+                (oldphone,)
             )   
             contact = cursor.fetchone()
 
@@ -185,7 +185,7 @@ def upsertcontacts():
     try:
         with connect_db() as conn:
             cursor = conn.cursor()
-            cursor.execute("SELECT * FROM Phonebook WHERE phone = ?", (phone))
+            cursor.execute("SELECT * FROM Phonebook WHERE phone = ?", (phone,))
             existing = cursor.fetchone()
 
             if existing:
@@ -211,15 +211,15 @@ def deletecontacts():
         cursor = conn.cursor()
         if choice == "1":
             name = input("Enter name to delete: ").strip()
-            cursor.execute("DELETE FROM Phonebook WHERE name = ?", (name))
+            cursor.execute("DELETE FROM Phonebook WHERE name = ?", (name,))
         elif choice == "2":
             phone = input("Enter phone: ").strip()
-            cursor.execute("DELETE FROM Phonebook WHERE phone = ?", (phone))
+            cursor.execute("DELETE FROM Phonebook WHERE phone = ?", (phone,))
         elif choice == "3":
             identifier = input("Enter name or phone: ").strip()
-            cursor.execute("DELETE FROM Phonebook WHERE phone = ?", (identifier))
+            cursor.execute("DELETE FROM Phonebook WHERE phone = ?", (identifier,))
             if cursor.rowcount == 0:
-                cursor.execute("DELETE FROM Phonebook WHERE name = ?", (identifier))
+                cursor.execute("DELETE FROM Phonebook WHERE name = ?", (identifier,))
         else:
             print("Invalid choice")
 
