@@ -1,0 +1,1 @@
+    ball = Ball(width // 2, height // 2, 25, 20, width, height)

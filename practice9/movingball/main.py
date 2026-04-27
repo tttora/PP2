@@ -11,7 +11,7 @@ def main():
     pygame.display.set_caption("Moving Red Ball")
 
     clock = pygame.time.Clock()
-    ball = Ball(width // 2, height // 2, 25, 20, width, height)
+    ball = Ball(400, 300, 25, 20, width, height)
 
     running = True
     while running:
